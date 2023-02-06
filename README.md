@@ -4,11 +4,11 @@ This is a C program that will report different metrics of the utilization of a g
 
 The program should accept several command line arguments:
 
---system
-        to indicate that only the system usage should be generated
+- --system
+        -to indicate that only the system usage should be generated
 
---user
-        to indicate that only the users usage should be generated
+- --user
+        -to indicate that only the users usage should be generated
 
 --graphics
         to include graphical output in the cases where a graphical outcome is possible as indicated below.
