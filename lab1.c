@@ -246,16 +246,19 @@ void graphicsMem(double prevMemUsage, float phyUsedMem) {
 
     // Calculating the value to be printed and the symbols to be used
     prevMemUsage = phyUsedMem - prevMemUsage;
-    char sym[2] = ":";
+    char sym[2] = "@";
+    char repeat[2] = ":";
     if (prevMemUsage > 0) {
-        strcpy(sym, "#");
+        strcpy(sym, "*");
+        strcpy(repeat, "#");
     }
 
     // Calculating # of time for the symbols to be printed
     prevMemUsage = fabs(prevMemUsage);
     int temp = (int)(floor(prevMemUsage * 100));
+    printf("%s", sym);
     for (int i = 0; i < temp; i++) {
-        printf("%s", sym);
+        printf("%s", repeat);
     }
     // Printing the values
     printf(" %2.2f (%2.2f) \n", prevMemUsage, phyUsedMem);
