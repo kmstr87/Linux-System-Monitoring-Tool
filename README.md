@@ -36,10 +36,10 @@ The reported "stats" include:
     - Virtual memory accounts for the physical memory and swap space together.
   - **Graphical representations**  
     - if the --graphics flag is used, generate a graphical representation showing the variation of memory used
-    - For Memory utilization:
+    - **For Memory utilization:**
     - :::@  total relative negative change
     - ###*  total relative positive change
-    - For CPU utilization:
+    - **For CPU utilization:**
     - ||||   positive percentage increase
 
 ## Documentations of the functions
@@ -60,7 +60,7 @@ conforming to the logic.
 
 ## Formula explanations
 
-**Calculating # of lines to skip at the end (~ line 120):**
+- **Calculating # of lines to skip at the end (~ line 120):**
 Add 2 to prevUserCount to consider barrier and title of user.
 If graphics is given, mult. sample by two to consider extra number of lines printed for graphics.
 Add 5 to samples to consider title and barrier of memory and CPU usage, and the printed output of CPU usage.
@@ -68,7 +68,7 @@ Mult. prevUserCount by user, mult. sample by system, and add the two together. T
 only want to print out user or system, only their section will be considered for skipping. 
 Skip by the new sum, which will get you to the bottom of the printed output.
 
-## Total CPU Usage
+- **Total CPU Usage:**
 Calculate the jiffies (idle + iotime) and total time of prev. and current iteratinon.
 Calculate the diff. between the prev. and current iteration for jiffies and total.
 Subtract Totald by idled (jiffies difference) to get working time.
@@ -76,11 +76,11 @@ Divide by totald to get percentage, and mult. by 1000 and div. by 10 to get the 
 
 ## Running the Program
 
-First, compile the program and then type "[output_name] --optional_flags optional_position_arguments
-**Note: When compiling, include the -lm flag after the name of the file. Ex: gcc lab1.c -lm
+- First, compile the program and then type "[output_name] --optional_flags optional_position_arguments
+- **Note: When compiling, include the -lm flag after the name of the file. Ex: gcc lab1.c -lm
         Also, before running the program, make sure to clear the screen before. Otherwise, the formatting
         of the printed statments will be out of order. (In the terminal, run "clear") **
         
-Aside: for next example, the compiled code will be called prog1.
-~ prog1 will print:
+- Aside: for next example, the compiled code will be called prog1.
+- ~ prog1 will print:
 
