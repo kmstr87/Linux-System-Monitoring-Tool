@@ -36,11 +36,11 @@ The reported "stats" include:
     - Virtual memory accounts for the physical memory and swap space together.
   - **Graphical representations**  
     - if the --graphics flag is used, generate a graphical representation showing the variation of memory used
-    - **For Memory utilization:**
-    - :::@  total relative negative change
-    - ###*  total relative positive change
-    - **For CPU utilization:**
-    - ||||   positive percentage increase
+    1 **For Memory utilization:**
+      - :::@  total relative negative change
+      - ###*  total relative positive change
+    2 **For CPU utilization:**
+      - ||||   positive percentage increase
 
 ## Documentations of the functions
 The overview of the functions are in the actual code itself, as I included the details of the functions
@@ -77,9 +77,9 @@ Divide by totald to get percentage, and mult. by 1000 and div. by 10 to get the 
 ## Running the Program
 
 - First, compile the program and then type "[output_name] --optional_flags optional_position_arguments
-- **Note: When compiling, include the -lm flag after the name of the file. Ex: gcc lab1.c -lm
+- **Note:** When compiling, include the -lm flag after the name of the file. Ex: gcc lab1.c -lm
         Also, before running the program, make sure to clear the screen before. Otherwise, the formatting
-        of the printed statments will be out of order. (In the terminal, run "clear") **
+        of the printed statments will be out of order. (In the terminal, run "clear")
         
 - Aside: for next example, the compiled code will be called prog1.
 - ~ prog1 will print:
