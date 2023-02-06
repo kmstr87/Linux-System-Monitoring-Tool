@@ -82,5 +82,7 @@ Divide by totald to get percentage, and mult. by 1000 and div. by 10 to get the 
         of the printed statments will be out of order. (In the terminal, run "clear")
         
 - *Aside: for next example, the compiled code will be called prog1.*
-- ~ prog1 will print:
+- ~ prog1 will print the program info, system info, user info, memory info, and cpu info in order.
+- ~ prog1 --tdelay=2 8 1 will run the program with 8 samples and 1 sec delay between
+- ~ prog1 --user --system is equal to ~prog1
 
