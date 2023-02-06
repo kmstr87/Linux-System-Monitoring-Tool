@@ -31,10 +31,10 @@ The reported "stats" include:
   - **system usage**
     - report how much utilization of the CPU is being done
     - report how much utilization of memory is being done (report used and free memory)
-  - ** Memory **  
+  - **Memory**  
     - Total memory is the actual physical RAM memory of the computer.
     - Virtual memory accounts for the physical memory and swap space together.
-  **Graphical representations**  
+  - **Graphical representations**  
     - if the --graphics flag is used, generate a graphical representation showing the variation of memory used
     - For Memory utilization:
     - :::@  total relative negative change
@@ -61,12 +61,12 @@ conforming to the logic.
 ## Formula explanations
 
 **Calculating # of lines to skip at the end (~ line 120):**
-- Add 2 to prevUserCount to consider barrier and title of user.
-- If graphics is given, mult. sample by two to consider extra number of lines printed for graphics.
-- Add 5 to samples to consider title and barrier of memory and CPU usage, and the printed output of CPU usage.
-- Mult. prevUserCount by user, mult. sample by system, and add the two together. This makes it so that if you
-- only want to print out user or system, only their section will be considered for skipping. 
-- Skip by the new sum, which will get you to the bottom of the printed output.
+Add 2 to prevUserCount to consider barrier and title of user.
+If graphics is given, mult. sample by two to consider extra number of lines printed for graphics.
+Add 5 to samples to consider title and barrier of memory and CPU usage, and the printed output of CPU usage.
+Mult. prevUserCount by user, mult. sample by system, and add the two together. This makes it so that if you
+only want to print out user or system, only their section will be considered for skipping. 
+Skip by the new sum, which will get you to the bottom of the printed output.
 
 ## Total CPU Usage
 Calculate the jiffies (idle + iotime) and total time of prev. and current iteratinon.
