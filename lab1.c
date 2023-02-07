@@ -93,12 +93,20 @@ int main(int argc, char *argv[]) {
         system = 1;
     }
 
-
-    programInfo(samples, tdelay);
-    sysInfo();
+    // Run this one if sequential is not called
+    if (sequential == 0) {
+        programInfo(samples, tdelay);
+        sysInfo();
+    }
+    
     for (int i = 0; i < samples; i++) {
         // save cursor position
-        printf("\033[s");
+        if (sequential == 0) printf("\033[s");
+        // Print every iteration if sequential is called
+        else {
+            programInfo(samples, tdelay);
+            sysInfo();
+        }
         if (user == 1) {
             prevUserCount = users(prevUserCount);                
         }
@@ -110,7 +118,7 @@ int main(int argc, char *argv[]) {
         }
         if (sequential == 1) printf(">>> iteration %d\n", i + 1);
         //Restoring cursor position
-        printf("\033[u");
+        if (sequential == 0)printf("\033[u");
            
         // Wait tdelay seconds before iterating again
         sleep(tdelay);
@@ -314,18 +322,11 @@ float sysMem(int graphics, int curIter, int samples, int sequential, double prev
             printf("\n");
         }
     } else {
-        // If sequential, print empty lines except for curIter each iter.
-        for (int i = 0; i < samples; i++) {
-            if (i == curIter) {
-                printf("%2.2f GB / %2.2f GB  --  %2.2f GB / %2.2f GB", phyUsedConv, phyTotalConv, virUsedConv, virTotalConv);
-                if (graphics == 0) printf("\n");
-                // If graphics, format the graphics output
-                else graphicsMem(prevUsedConv, phyUsedConv);
-                continue;
-            }
-            printf("\033[2K");
-            printf("\n");
-        }
+        // Print current Memory usage
+        printf("%2.2f GB / %2.2f GB  --  %2.2f GB / %2.2f GB", phyUsedConv, phyTotalConv, virUsedConv, virTotalConv);
+        // If graphics, format the graphics output
+        if (graphics == 1) graphicsMem(prevUsedConv, phyUsedConv);
+        else printf("\n");
     }
     
     printf("%s\n", BARRIER);
@@ -442,15 +443,8 @@ void displayCpu(char prevCpu[], int graphics, int sequential,  int curIter, int 
     if (sequential == 1) {
         // Print current iter. info
         printf(",     Current Iter.: %d\n", curIter + 1);
-        // If graphics + seq. is called
-        if (graphics == 1) {
-            // Print out new line except for the cur. Iter graphics
-            for (int i = 0; i < curIter; i++) {
-                printf("\033[2K");
-                printf("\n");
-            }
-            graphicsCpu(numInc, usage);
-        }
+        // If graphics is called, print the graphics of CPU usage
+        if (graphics == 1) graphicsCpu(numInc, usage);
         
     } else {
         // Only print the total CPU usage
