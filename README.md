@@ -51,6 +51,12 @@ The overview of the functions are in the actual code itself, as I included the d
 similar to Python docstrings.
 
 ## Overcoming Problems
+Concurrency: I decided to go with the design where I fork three child processes every iteration to handle the sleep() call.
+Every iteration, I create three child processes, and make each child process calculate the values for memory, users, and cpu utilization.
+After the processes have finished its job, it writes to the parent process via pipe, and then it exits. When all three child processes have been terminated,
+the parent reads the values and prints them out to the screen. Right before the program sleeps for -tdelay seconds, program checks to see if it had been interrupted
+by ctrl+c or ctrl+z. It ignores ctrl+z completely, for when ctrl+c signal was given, it asks the user if they want to quit. If -y was given, program quits. If -n was given, it continues its process.
+
 Whenever I ran into a problem, I first tried to find out what the problem was. If it was a simple syntax error,
 problem solved! However, when I ran into a complex bug, I tried to find what tools I used, and read the documentations
 on the tool. If it was hard to understand, I searched it up online to look for explanations. I played around with the tool
