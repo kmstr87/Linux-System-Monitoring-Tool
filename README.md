@@ -1,6 +1,6 @@
 # Linux-System-Monitoring-Tool
 
-This is a C program that will report different metrics of the utilization of a given system as described below.
+This is a C program that will report different metrics of the utilization of a given system as described below, but implemented concurrently.
 
 The program should accept several command line arguments:
 
@@ -41,6 +41,10 @@ The reported "stats" include:
       - ###*  total relative positive change
     2. **For CPU utilization:**
       - ||||   positive percentage increase
+      
+The program also intercept signals coming from Ctrl-Z and Ctrl-C.
+- For the former, it will just ignore it as the program should not be run in the background while running interactively.
+- For the latter, the program will ask the user whether it wants to quit or not the program.
 
 ## Documentations of the functions
 The overview of the functions are in the actual code itself, as I included the details of the functions
@@ -52,11 +56,9 @@ problem solved! However, when I ran into a complex bug, I tried to find what too
 on the tool. If it was hard to understand, I searched it up online to look for explanations. I played around with the tool
 in a scratch c file, and then refactored the code after understanding more about the tool.
 
-Ex: When using getopt_long, I got a segfault error. I read the man page and found out that I forgot to include a row of zeroes in my struct.
+Ex: I had a hard time figuring out why my values weren't printing after the child processes writing to the pipe. It was because I
+one of the variables I used for get the size of the string was declared in the child process, so it didn't exist in parent process.
 
-For formulas, I tried to figure it out myself. If it was not giving out what I was expecting, I used a debugger (GDB) to find out where the problem was,
-and refactored my code. If the formula was more widely known (calculating total CPU usage), I searched it up online, understood the logic, and wrote my code
-conforming to the logic.
 
 ## Formula explanations
 
@@ -69,16 +71,17 @@ only want to print out user or system, only their section will be considered for
 Skip by the new sum, which will get you to the bottom of the printed output.
 
 - **Total CPU Usage:**
-Calculate the jiffies (idle + iotime) and total time of prev. and current iteratinon.
-Calculate the diff. between the prev. and current iteration for jiffies and total.
-Subtract Totald by idled (jiffies difference) to get working time.
-Divide by totald to get percentage, and mult. by 1000 and div. by 10 to get the total CPU usage.
+Total cpu utilization time: Ti = useri + nicei + sysi + idlei + IOwaiti + irqi + softirqi.
+Idle time: Ii = idlei., where i represents a sampling time; hence the CPU utilization at time 
+is given by U_i = T_i - I_i.
+Then, the CPU utilization will be given by, ((U_2 - U_1)/(T_2 - T_1)) * 100
+
 
 ## Running the Program
 
-- First, compile the program and then type "[output_name] --optional_flags optional_position_arguments
-- **Note:** When compiling, include the -lm flag after the name of the file. Ex: gcc lab1.c -lm
-        Also, before running the program, make sure to clear the screen before. Otherwise, the formatting
+- First, compile the program by running cmd "make lab3". Then, to clean .o files, run "make clean". This should output lab3 file, where the program can be run
+by cmd "./lab3"
+- **Note:** Before running the program, make sure to clear the screen before. Otherwise, the formatting
         of the printed statments will be out of order. (In the terminal, run "clear")
         
 - *Aside: for next example, the compiled code will be called prog1.*
