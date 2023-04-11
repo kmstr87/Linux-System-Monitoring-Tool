@@ -13,7 +13,7 @@ The program should accept several command line arguments:
 - --graphics
   - to include graphical output in the cases where a graphical outcome is possible as indicated below.
 
---sequential
+- --sequential
   - to indicate that the information will be output sequentially without needing to "refresh" the screen 
 
 - --samples=N
